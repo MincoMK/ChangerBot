@@ -1,0 +1,33 @@
+<head>
+    <title>결제하기</title>
+    <script src="https://js.tosspayments.com/v1/payment"></script>
+</head>
+<body>
+    <script>
+        var clientKey = 'test_ck_4vZnjEJeQVxO94Q92yP3PmOoBN0k'
+        var tossPayments = TossPayments(clientKey) // 클라이언트 키로 초기화하기
+
+        window.addEventListener('load', () => {
+            tossPayments.requestPayment('가상계좌', { // 결제 수단 파라미터
+                                                  // 결제 정보 파라미터
+                amount: 15000,
+                orderId: Math.random().toString(36).substr(2),
+                orderName: '토스 티셔츠 외 2건',
+                customerName: '박토스',
+                successUrl: 'http://localhost:9999/success',
+                failUrl: 'http://localhost:9999/fail',
+                validHours: 24,
+                cashReceipt: {
+                    type: '소득공제',
+                },
+            })
+                .catch(function (error) {
+                    if (error.code === 'USER_CANCEL') {
+                        // 결제 고객이 결제창을 닫았을 때 에러 처리
+                    } else if (error.code === 'INVALID_CARD_COMPANY') {
+                        // 유효하지 않은 카드 코드에 대한 에러 처리
+                    }
+                })
+        })
+    </script>
+</body>
