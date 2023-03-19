@@ -5,4 +5,4 @@ RUN npm install --save-dev
 RUN npm i ts-node -g
 COPY . .
 ENV NODE_ENV=production
-CMD ["ts-node", "src/index"]
+CMD ["node", "dist/index"]
