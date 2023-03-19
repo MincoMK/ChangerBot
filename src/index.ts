@@ -10,6 +10,13 @@ import check from "./utils/checker";
 
 export const client = new Client({ intents: new IntentsBitField(65535) });
 
+process.on('unhandledRejection', (error) => {
+  console.error('Unhandled promise rejection:', error);
+});
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught exception:', error);
+});
+
 client.on('ready', () => {
   console.log('Bot ready!');
   commandManager.registerCommand(new PingCommand());
