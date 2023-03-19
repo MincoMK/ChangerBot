@@ -31,7 +31,7 @@ pipeline {
             steps {
                 echo 'Deploying...'
                 sh "docker build -t changer ."
-                sh "docker run -d -p 9092:9092 --name changer changer"
+                sh "docker run -d --name changer changer"
             }
         }
     }

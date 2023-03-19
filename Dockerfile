@@ -2,5 +2,7 @@ FROM node:19
 WORKDIR /app
 COPY package.json .
 RUN npm install --save-dev
+RUN npm i ts-node -g
 COPY . .
-RUN ["node", "--require", "ts-node/register", "src/index.ts"]
+ENV NODE_ENV=production
+RUN ["ts-node", "src/index"]
